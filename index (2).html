@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas-Eric-IFDSR</title>
+    <!---Tugas Eric Wiryawan Wijaya IF D SR 2403311704------->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        #header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        #main-container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        #Memori {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .card-text {
+            margin-top: 20px;
+        }
+        .content {
+            margin: 10px 0;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        #tgl {
+          color: red;
+        }
+
+        #count {
+          color: #2980b9;
+        }
+        
+        #word-count {
+          color: #2980b9;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            #title {
+                font-size: 24px;
+            }
+            .card-text {
+                font-size: 20px;
+            }
+        }
+        .Tombol{
+            display: block;
+            margin: 30px auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+      <span class="card-text" id="tgl">Tanggal : </span>
+    </div>
+    <div id="main-container">
+        <h1 id="Memori"></h1>
+        <p class="content">Konten</p>
+        <span class="card-text" id="count">Jumlah kalimat : </span><br>
+        <span class="card-text" id="word-count">Jumlah kata : </span>
+    </div>
+    <button id="btnIdentifikasi" class="Tombol">Identifikasi Paragraf</button>
+    <p id="hasil"></p>
+</body>
+<script>
+    document.title = "Memori";
+    let tanggal = document.getElementById("tgl");
+    tanggal.innerHTML += new Date(Date.now()).toLocaleDateString();
+
+    let web = {
+        "title": "Memori",
+        "data": "Memori adalah urutan byte yang berisi sepotong kecil informasi. Informasi ini mungkin menjadi perintah untuk mengatakan pada computar apa yang harus dilakukan. Sel mungkin berisi data yang diperlukan computar untuk melakukan suatu perintah. Setiap slot mungkin berisi salah satu, dan apa yang sekarang menjadi data mungkin saja kemudian menjadi perintah. Ukuran masing-masing sel, dan jumlah sel, berubah secara hebat dari computar ke computar, dan teknologi dalam pembuatan memori sudah berubah secara hebat dari relay elektromekanik, ke tabung yang diisi dengan air raksa di mana pulsa akustik terbentuk, sampai matriks magnet permanen, ke setiap transistor, ke sirkuit terpadu dengan jutaan transistor di atas satu chip silikon."
+        }
+
+        let judul = document.getElementById("Memori");
+        let konten = document.getElementsByClassName("content");
+        web.data = web.data.replace(/computar/gi, "komputer");
+
+        judul.innerHTML = web.title;
+        konten[0].innerHTML = web.data;
+
+        let sudahDitekan = false;
+
+        document.getElementById("btnIdentifikasi").addEventListener("click", function () {
+            if (sudahDitekan) {
+                alert("Paragraf Sudah diindetifikasi");
+                return;
+            }
+
+            let isiParagraf = document.getElementsByClassName("content")[0].innerText;
+
+            let jumlahKalimat = isiParagraf.split(/[.!?]/).filter(s => s.trim().length > 0).length;
+            let jumlahKata = isiParagraf.trim().split(/\s+/).length;
+
+            document.getElementById("count").innerHTML = `Jumlah kalimat : ${jumlahKalimat}`;
+            document.getElementById("word-count").innerHTML = `Jumlah kata : ${jumlahKata}`;
+
+            sudahDitekan = true;
+        });
+
+</script>
+</html>
